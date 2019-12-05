@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyForum.Data
 {
-    public interface IForum
+    public interface IForum : IDisposable
     {
         Forum GetById(int id);
         IEnumerable<Forum> GetAll();
@@ -18,5 +18,6 @@ namespace MyForum.Data
         Task Delete(int forumId);
         Task UpdateForumTitle(int forumId, string newTitle);
         Task UpdateForumDescription(int forumId, string newDescription);
+        
     }
 }

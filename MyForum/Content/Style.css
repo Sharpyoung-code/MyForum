@@ -1,0 +1,180 @@
+﻿body {
+    padding-top: 132px;
+    background: url(main.jpg);
+    background-repeat: no-repeat;
+    background-color: #EEE;
+    background-position: center;
+    background-attachment:fixed;
+    background-size: 100%;
+}
+@media (max-width: 980px) {
+    body{
+        padding-top: 0px;
+    }
+}
+.frontPageHeading{
+    background: url(mainForum.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-top: 132px;
+    height: 40vh;
+    position: relative;
+    border: 2px solid white;
+    border-radius: 5px;
+}
+.frontPage{
+    background-color: black;
+    border: 1px solid white;
+}
+.frontPage h3{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.frontPage .frontPageSearch {
+        padding-top: 10px;
+        padding-bottom: 10px;
+}
+.frontPageText {
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding-bottom: 10vh;
+    text-transform: uppercase;
+}
+.subTitle {
+    background-color: #343a40;
+    display: table-cell;
+    vertical-align: middle;
+}
+.forumTitle a{
+    font-size: 20px;
+    font-weight: 400;
+}
+.forumHeading{
+    background-color: black;
+    border: 1px solid white;
+    padding: 1rem 1rem;
+}
+#forumIndexTable{
+    border: 1px solid white;
+    border-radius: 5px;
+}
+.Logo{
+    display: inline-block;
+    border-radius: 3px;
+    margin-right: 20px;
+    float: left;
+    border: 1px solid #555;
+    height: 40px;
+    width: 40px;
+    background-size: 100%;
+    background-color: #ddd;
+}
+.forumTitle span{
+    padding-left: 10px;
+}
+.forumTitle i {
+    margin-top:20px;
+}
+small{
+    font-size: 80%;
+    text-align: center;
+}
+.subTitle a{
+    color: indianred;
+}
+.subTitle span {
+    font-size: 12px;
+    padding-left: 20px;
+}
+span, p, i, h1, h2, h3, h4, h5, h6 {
+    color: white;
+}
+table{
+    border: 2px solid #000000;
+    border-radius: 5px;
+}
+.forumPageTable .row .forumDescription{
+    color: white;
+ }
+.forumPageTable .row .postsInside, .dateCreated {
+    color: rgba(255,255,255,.5);
+}
+#topicHeading{
+    padding-left: 20px;
+    padding-right: 0;
+    padding-top: 20px;
+    background-color: #000000;
+    border: 1px solid white;
+}
+#topicHeading .forumName{
+    border-bottom: 1px solid white;
+}
+.forumCreatePost{
+    display: inline;
+}
+.forumCreatePost p {
+    margin: 0;
+}
+.forumName form .buttonSearch{
+    background: none !important;
+    color: red;
+    padding: 0 !important;
+    font: inherit;
+    margin-bottom: 10px;
+}
+.postHeading{
+    margin-top: 20px;
+    background-color: black;
+    height: 100px;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+.postHeading .backBtn{
+    position: relative;
+    float: right;
+    padding-right: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.noPost{
+    text-align: center;
+}
+.searchBar{
+    transition: ease .3s;
+    margin-bottom: 10px;
+    background-color: #333;
+}
+.searchForm input::placeholder{
+    color: white;
+}
+.searchBar:focus{
+    background-color: #fff;
+    color: black;
+    width: 80%;
+}
+.postReplyPage, .forumsPage, .frontPageImage {
+    padding-top: 0;
+}
+@media (max-width: 980px) {
+    .postReplyPage, .forumsPage, .frontPageHeading {
+        padding-top: 132px;
+    }
+}
+.postReplyPage .postBody{
+    background-color: white;
+    margin-top: 30px;
+    border-radius: 5px;
+}
+.postReplyPage .postBody .col-md-3{
+    border-right: 1px solid black;
+}
+.noReplies {
+    text-align: center;
+}
+#latestPostTable{
+    border: 1px solid white;
+}

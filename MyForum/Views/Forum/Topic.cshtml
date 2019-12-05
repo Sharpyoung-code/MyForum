@@ -1,0 +1,202 @@
+﻿@model MyForum.Models.Post.ForumTopicViewModel
+
+<div class="jumbotron" id="topicHeading">
+    <div class="forumName">
+        @if (Model.Forum.Name == "Python")
+            {
+            <img src="~/Content/python.png" alt="pythonLogo" />
+        }
+        @if (Model.Forum.Name == "C#")
+            {
+            <img src="~/Content/csharp.png" alt="c#Logo" />
+        }
+        @if (Model.Forum.Name == "Javascript")
+            {
+            <img src="~/Content/javascript.png" alt="javascriptLogo" />
+        }
+        @if (Model.Forum.Name == "Go")
+            {
+            <img src="~/Content/go.png" alt="goLogo" />
+        }
+        @if (Model.Forum.Name == "Java")
+            {
+            <img src="~/Content/java.png" alt="javaLogo" />
+        }
+        @if (Model.Forum.Name == "C")
+            {
+            <img src="~/Content/c.png" alt="cLogo" />
+        }
+        @if (Model.Forum.Name == "C++")
+            {
+            <img src="~/Content/cpp.png" alt="C++Logo" />
+        }
+        @if (Model.Forum.Name == "CSS")
+            {
+            <img src="~/Content/css.png" alt="cssLogo" />
+        }
+        @if (Model.Forum.Name == "Html")
+            {
+            <img src="~/Content/html.png" alt="htmlLogo" />
+        }
+        @if (Model.Forum.Name == "Swift")
+            {
+            <img src="~/Content/swift.png" alt="swiftLogo" />
+        }
+        @if (Model.Forum.Name == "Ruby")
+            {
+            <img src="~/Content/ruby.png" alt="rubyLogo" />
+        }
+        @if (Model.Forum.Name == "Kotlin")
+            {
+            <img src="~/Content/kotlin.png" alt="kotlinLogo" />
+        }
+        <h2>@Model.Forum.Name Forum</h2>
+        <form method="post" action="/Forum/Search/@Model.Forum.Id" role="form">
+            <div class="searchForm">
+                <input id="SearchQuery" name="SearchQuery" type="text" placeholder="Search...." class="searchBar" onfocus="clearThis(this)" />
+                @Html.HiddenFor(m => m.Forum.Id, new { id = Model.Forum.Id })
+                <button type="submit" class="btn buttonSearch">
+                    <i class="fa fa-search" style="font-size:20px"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="forumCreatePost">
+        <p style="padding-top: 20px">Welcome to the @Model.Forum.Name forum. <br/>
+        Please keep the posts friendly and on-topic. </p>
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <p>
+                <span>You must be a 
+                    <a href="/Account/Register">
+                        registered member
+                    </a>
+                to create a new post. </span>
+             </p>
+        }
+        @if (User.Identity.IsAuthenticated)
+        { 
+            <p>
+                <span style="position: relative; float: right; padding-bottom: 10px;padding-top: 10px; padding-right: 20px">
+                    <a href="/Post/Create/@Model.Forum.Id" class="btn btn-info">Create New Post</a>
+                </span>
+             </p>
+        }
+    </div>
+</div>
+@if (Model.Posts.Any())
+{
+    <table class="table table-bordered" id="topicViewTable" style="border-radius: 10px">
+        <tbody>
+            @foreach (var topic in Model.Posts)
+            {
+                <tr style="background-color: #343a40">
+                    <td>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="forumTitle">
+                                    <i class="fa fa-bookmark" style="background-size: 100%; font-size: 30px"></i>
+                                    <span>
+                                        <a href="/Post/Index/@topic.Id">
+                                            @topic.Title
+                                        </a>
+                                    </span>
+                                </div>
+                                <div class="subTitle">
+                                    <span>Started By <a href="/Profile/Details/@topic.AuthorId">@topic.AuthorName</a></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3" style="vertical-align: middle">
+                                <div class="subTitle">
+                                    @if (topic.RepliesCount == 1)
+                                    {
+                                        <span class="fa fa-comment"> @topic.RepliesCount Comment</span>
+                                    }
+                                    @if (topic.RepliesCount == 0)
+                                    {
+                                        <span class="fa fa-comments"> No Comments</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fa fa-comments"> @topic.RepliesCount Comments</span>
+                                    }
+                                    <br />
+                                    <span class="fa fa-user-o" id="postUser">
+                                        <a href="/Profile/Detail/@topic.AuthorId">
+                                            @topic.AuthorName
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="subTitle">
+                                    @{
+                                        DateTime startTime = Convert.ToDateTime(@topic.DatePosted);
+                                        DateTime endTime = DateTime.Now;
+                                        TimeSpan span = endTime.Subtract(startTime);
+                                        var datePosted = span;
+
+                                        if (datePosted.Seconds <= 59 && datePosted.Minutes == 0 && datePosted.Hours == 0)
+                                        {
+                                            <span>
+                                                Posted: @datePosted.Seconds secs ago
+                                            </span>
+                                        }
+                                        if (datePosted.Minutes <= 59 && datePosted.Hours == 0)
+                                        {
+                                            <span>
+                                                Posted: @datePosted.Minutes mins ago
+                                            </span>
+                                        }
+                                        if (datePosted.Hours <= 24 && datePosted.Days == 0)
+                                        {
+                                            <span>
+                                                Posted: @datePosted.Hours hours ago
+                                            </span>
+                                        }
+                                        if (datePosted.Days != 0)
+                                        {
+                                            <span>
+                                                Posted: @datePosted.Days days ago
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span>
+                                                Posted: ago
+                                            </span>
+                                        }
+
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+}
+else
+{
+<div class="noPost">
+        <h3>
+            It looks like there are no @Model.Forum.Name posts yet. <br/>
+            Why not
+            <a href="/Post/Create/@Model.Forum.Id">
+                <span style="color: #17a2b8; font-weight:500">Post</span>
+            </a>
+            something?
+        </h3>
+</div>
+}
+
+@section Scripts{
+    <script>
+        function clearThis(target) {
+            target.value = "";
+        }
+    </script>
+    }

@@ -60,6 +60,14 @@
     <Compile Include="Migrations\201911261341514_Add initial entity models.Designer.cs">
       <DependentUpon>201911261341514_Add initial entity models.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911291248200_models ApplicationUser.cs" />
+    <Compile Include="Migrations\201911291248200_models ApplicationUser.Designer.cs">
+      <DependentUpon>201911291248200_models ApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912031425316_New Entities.cs" />
+    <Compile Include="Migrations\201912031425316_New Entities.Designer.cs">
+      <DependentUpon>201912031425316_New Entities.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Forum.cs" />
@@ -74,6 +82,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201911261341514_Add initial entity models.resx">
       <DependentUpon>201911261341514_Add initial entity models.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911291248200_models ApplicationUser.resx">
+      <DependentUpon>201911291248200_models ApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912031425316_New Entities.resx">
+      <DependentUpon>201912031425316_New Entities.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

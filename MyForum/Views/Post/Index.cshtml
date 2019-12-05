@@ -1,0 +1,85 @@
+﻿@model MyForum.Models.Post.PostIndexModel
+
+<div class="postReplyPage">
+    <div class="postHeading">
+        <span style="padding-top: 30px; padding-bottom: 30px; padding-left: 20px; position: relative; float: left">
+        @Model.Title
+        </span>
+        <span class="backBtn">
+            <a href="/Forum/Topic/@Model.ForumId" class="btn btn-info">
+                Back To @Model.ForumName
+            </a>
+        </span>
+    </div>
+
+    <div class="row postBody">
+        <div class="col-md-3">
+            <div class="postAuthor">
+                <i class="fa fa-user-circle-o" style="color: black"></i>
+                <a href="/Profile/Detail/@Model.AuthorId">
+                    @Model.AuthorName
+                </a>
+                (<span style="color: red">@Model.AuthorRating</span>)<br />
+
+                @if (Model.IsAdmin)
+            {
+                    <span class="isAdmin small">Admin</span>
+                    <br />
+                }
+                <span style="color:black">@Model.DateCreated</span>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="postContent">
+                @Html.Raw(Model.PostContent)
+            </div>
+        </div>
+    </div>
+    <div class="row"></div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="postreplyBtn" style="background-color: darkgray; text-align:center; padding-top: 2px; padding-bottom: 2px; vertical-align: middle; border-radius: 0px 0px 5px 5px">
+            <div style="text-align: center; position: relative">
+            <h6>
+                <span style="color: black">(</span><a href="/Reply/Create/@Model.Id">Post Reply</a><span style="color:black">)</span>
+            </h6>
+            </div>
+        </div>
+    }
+</div>
+@if (Model.Replies.Any())
+{
+    foreach (var reply in Model.Replies)
+    {
+        <div class="row">
+        <div class="col-md-3">
+            <div class="replyAuthor">
+                <i class="fa fa-user-circle-o"></i>
+                Replied By<a href="/Profile/Detail/@reply.AuthorId">
+                    @reply.AuthorName
+                </a>
+                (@reply.AuthorRating)
+                
+                @if (reply.IsAuthorAdmin)
+                {
+                    <span class="isAdmin small">Admin</span>
+                    <br />
+                }
+                <span>On: @reply.DateCreated</span>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="postContent">
+                @Html.Raw(Model.PostContent)
+            </div>
+        </div>
+        </div>
+    }
+}
+else {
+    <div class="noReplies">
+        <h3>
+            There are no replies to this post.<br/>
+        </h3>
+    </div>
+}

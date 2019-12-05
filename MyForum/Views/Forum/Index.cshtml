@@ -1,21 +1,99 @@
 ﻿@model MyForum.Models.Forum.ForumIndexViewModel
 
-<h1>Forums</h1>
+<div class="forumsPage">
+<div class="jumbotron forumHeading">
+    <h2><i class="fa fa-book" style="font-size: 30px"></i> FORUMS</h2>
+</div>
 
+<div class="forumPageTable">
 <table class="table table-hover" id="forumIndexTable">
     <tbody>
         @foreach (var forum in Model.ForumList)
         {
-            <tr> 
+            <tr style="background-color: #343a40"> 
                 <td>
-                    @Html.ActionLink(@forum.Name, "Topics", "Forum", new { @class = "forumNameLink" , id = @forum.Id })
-                    
-                </td>
-                <td>
-                    @forum.Description
+                    <div class="row">
+                        <div class="col-md-3">
+
+                            @if (forum.Name == "Python")
+                            {
+                                <div class="Logo" style="background-image: url('/Content/python.png')"></div>
+                            }
+                            @if (forum.Name == "Javascript")
+                            {
+                                <div class="Logo" style="background-image: url('/Content/javascript.png')"></div>
+                            }
+                            @if (forum.Name == "C#")
+                            {
+                                <div class="Logo" style="background-image: url('/Content/csharp.png')"></div>
+                            }
+                            @if (forum.Name == "Go")
+                            {
+                                <div class="Logo" style="background-image: url('/Content/go.png')"></div>
+                            }
+                            @if (forum.Name == "Php")
+                            {
+                                <div class="Logo" style="background-image: url('/Content/php.png')"></div>
+                            }
+                            @if (forum.Name == "C")
+                            {
+                                <div class="Logo" style="background-image: url('/Content/c.png')"></div>
+                            }
+                            @if (forum.Name == "C++")
+                            {
+                                <div class="Logo" style="background-image: url('/Content/cpp.png')"></div>
+                            }
+                            @if (forum.Name == "CSS")
+                            {
+                                <div class="Logo" style="background-image: url('/Content/css.png')"></div>
+                            }
+                            @if (forum.Name == "Html")
+                            {
+                                <div class="Logo" style="background-image: url('/Content/html.png')"></div>
+                            }
+                            @if (forum.Name == "Java")
+                            {
+                                <div class="Logo" style="background-image: url('/Content/java.png')"></div>
+                            }
+                            @if (forum.Name == "Ruby")
+                            {
+                                <div class="Logo" style="background-image: url('/Content/ruby.png')"></div>
+                            }
+                            @if (forum.Name == "Kotlin")
+                            {
+                                <div class="Logo" style="background-image: url('/Content/kotlin.png')"></div>
+                            }
+                            @if (forum.Name == "Swift")
+                            {
+                                <div class="Logo" style="background-image: url('/Content/swift.png')"></div>
+                            }
+                            <div class="forumName">
+                                <a href="/Forum/Topic/@forum.Id"><strong style="text-transform: uppercase">@forum.Name</strong></a>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="forumDescription">
+                                @forum.Description
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="postsInside">
+                                @forum.postsCount<br/>
+                                Posts
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="dateCreated">
+                                Created On : <br/>
+                                @forum.Created
+                            </div>
+                        </div>
+                    </div> 
                 </td>
             </tr>
         }
     </tbody>
 </table>
+</div>
+</div>
 

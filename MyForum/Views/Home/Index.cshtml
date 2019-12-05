@@ -1,31 +1,170 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿@model MyForum.Models.Home.HomeIndexModel
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<div class="frongPageImage">
+<div class="frontPageHeading">
+    <div class="frontPageText">
+        <p class="frontPageSubHeading">Learn, Collaborate, Share Knowledge</p>
+        <p class="frontPageSubHeading">Tech Forum is the world's fastest growing coding forum</p>
+    </div>
+</div><br />
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <div class="row frontPage">
+        <div class="col-md-6">
+            <h3 id="latestPosts">LATEST POSTS</h3>
+        </div>
+        <div class="col-md-6 frontPageLearn">
+        <div class="frontPageSearch" style="position:relative; float:right">
+            @using (Html.BeginForm("Search", "Search", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "searchForm" }))
+           {
+               @Html.TextBoxFor(m => m.SearchQuery, new { @class = "form-control", placeholder = "Search...." })
+           }
+        </div>
+       </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <div class="row frontPageContent">
+        
+        <table class="table table-hover" id="latestPostTable">
+            <tbody>
+                @foreach (var post in Model.LatestPosts)
+                {
+                    <tr style="background-color: #343a40">
+                        <td>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    
+                                        @if(post.Forum.Name == "Python")
+                                        {
+                                            <div class="Logo" style="background-image: url('/Content/python.png')"></div>
+                                        }
+                                        @if (post.Forum.Name == "Javascript")
+                                        {
+                                            <div class="Logo" style="background-image: url('/Content/javascript.png')"></div>
+                                        }
+                                      @if (post.Forum.Name == "C#")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/c#.png')"></div>
+                                    }
+                                    @if (post.Forum.Name == "Go")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/go.png')"></div>
+                                    }
+                                    @if (post.Forum.Name == "Php")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/php.png')"></div>
+                                    }
+                                    @if (post.Forum.Name == "C")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/c.png')"></div>
+                                    }
+                                    @if (post.Forum.Name == "C++")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/c++.png')"></div>
+                                    }
+                                    @if (post.Forum.Name == "CSS")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/css.png')"></div>
+                                    }
+                                    @if (post.Forum.Name == "Html")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/html.png')"></div>
+                                    }
+                                    @if (post.Forum.Name == "Java")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/java.png')"></div>
+                                    }
+                                    @if (post.Forum.Name == "Ruby")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/ruby.png')"></div>
+                                    }
+                                    @if (post.Forum.Name == "Kotlin")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/kotlin.png')"></div>
+                                    }
+                                    @if (post.Forum.Name == "Swift")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/swift.png')"></div>
+                                    }
+                                    <div class="forumTitle">
+                                        <span>
+                                            <a href="/Post/Index/@post.Id">
+                                                @post.Title
+                                            </a>
+                                        </span>
+                                    </div>
+                                    <div class="subTitle">
+                                        <span>Started By <a href="/Profile/Details/@post.AuthorId">@post.AuthorName</a> in <a href="/Forum/Index/@post.Forum.Id">@post.Forum.Name</a> Forum</span>
+                                    </div>
+                                    </div>
+                                   
+                                      <div class="col-md-3" style="vertical-align: middle">
+                                        <div class="subTitle">
+                                        @if (post.RepliesCount == 1)
+                                        {
+                                            <span class="fa fa-comment"> @post.RepliesCount Comment</span>
+                                        }
+                                        @if (post.RepliesCount == 0)
+                                        {
+                                        <span class="fa fa-comments"> No Comments</span>
+                                        }
+                                        else
+                                        {
+                                        <span class="fa fa-comments"> @post.RepliesCount Comments</span>
+                                        }
+                                        <br/>
+                                        <span class="fa fa-user-o" id="postUser">
+                                           <a href="/Profile/Detail/@post.AuthorId">
+                                              @post.AuthorName
+                                           </a>
+                                        </span>
+                                        </div>
+                                       </div>
+                                        <div class="col-md-3">
+                                            <div class="subTitle">
+                                            @{
+                                                DateTime startTime = Convert.ToDateTime(@post.DatePosted);
+                                                DateTime endTime = DateTime.Now;
+                                                TimeSpan span = endTime.Subtract(startTime);
+                                                var datePosted = span;
+
+                                            if (datePosted.Seconds <= 59 && datePosted.Minutes == 0 && datePosted.Hours == 0 )
+                                            {
+                                                <span>
+                                                    Posted: @datePosted.Seconds secs ago
+                                                </span>
+                                            }
+                                                if (datePosted.Minutes <= 59 && datePosted.Hours == 0)
+                                                {
+                                                    <span>
+                                                        Posted: @datePosted.Minutes mins ago
+                                                    </span>
+                                                }
+                                                if (datePosted.Hours <= 24 && datePosted.Days == 0)
+                                                {
+                                                    <span>
+                                                        Posted: @datePosted.Hours hours ago
+                                                    </span>
+                                                }
+                                                if (datePosted.Days != 0)
+                                                {
+                                                    <span>
+                                                        Posted: @datePosted.Days days ago
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span>
+                                                        Posted: ago
+                                                    </span>
+                                                }
+
+                                            }
+                                           </div>
+                                        </div>
+                                </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+ </div>

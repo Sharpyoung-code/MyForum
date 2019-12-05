@@ -49,9 +49,9 @@ namespace MyForum.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "UserName")]
+        [DataType(DataType.Text)]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -64,6 +64,11 @@ namespace MyForum.Models
 
     public class RegisterViewModel
     {
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
