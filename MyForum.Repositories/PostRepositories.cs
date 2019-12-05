@@ -63,6 +63,11 @@ namespace MyForum.Repositories
                 forum.Posts
                 .Where(post => post.Title.Contains(searchQuery) || post.Content.Contains(searchQuery));
         }
+        public IEnumerable<Post> GetFilteredPosts(string searchQuery)
+        {
+            return GetAll().Where(post => post.Title.Contains(searchQuery)
+                    || post.Content.Contains(searchQuery));
+        }
 
         public IEnumerable<Post> GetPostsByForum(int id)
         {
@@ -101,7 +106,5 @@ namespace MyForum.Repositories
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
-       
     }
 }

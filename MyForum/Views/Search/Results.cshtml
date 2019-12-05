@@ -1,0 +1,177 @@
+﻿@model MyForum.Models.Search.SearchViewModel
+
+<div class="searchView">
+<div class="jumbotron" id="topicHeading">
+    <div class="forumName">
+        <h2>Search Result for: @Model.SearchQuery</h2>
+        <form method="post" action="/Search/Search" role="form">
+            <div class="searchForm">
+                <input id="SearchQuery" name="SearchQuery" type="text" placeholder="Search...." class="searchBar" onfocus="clearThis(this)" />
+                <button type="submit" class="btn buttonSearch">
+                    <i class="fa fa-search" style="font-size:20px"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+@if (!Model.EmptySearchResults)
+{
+    <table class="table table-bordered" id="topicViewTable" style="border-radius: 10px">
+        <tbody>
+            @foreach (var topic in Model.Posts)
+            {
+                <tr style="background-color: #343a40">
+                    <td>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="forumTitle">
+                                    @if (topic.Forum.Name == "Python")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/python.png')"></div>
+                                    }
+                                    @if (topic.Forum.Name == "Javascript")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/javascript.png')"></div>
+                                    }
+                                    @if (topic.Forum.Name == "C#")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/c#.png')"></div>
+                                    }
+                                    @if (topic.Forum.Name == "Go")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/go.png')"></div>
+                                    }
+                                    @if (topic.Forum.Name == "Php")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/php.png')"></div>
+                                    }
+                                    @if (topic.Forum.Name == "C")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/c.png')"></div>
+                                    }
+                                    @if (topic.Forum.Name == "C++")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/c++.png')"></div>
+                                    }
+                                    @if (topic.Forum.Name == "CSS")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/css.png')"></div>
+                                    }
+                                    @if (topic.Forum.Name == "Html")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/html.png')"></div>
+                                    }
+                                    @if (topic.Forum.Name == "Java")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/java.png')"></div>
+                                    }
+                                    @if (topic.Forum.Name == "Ruby")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/ruby.png')"></div>
+                                    }
+                                    @if (topic.Forum.Name == "Kotlin")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/kotlin.png')"></div>
+                                    }
+                                    @if (topic.Forum.Name == "Swift")
+                                    {
+                                        <div class="Logo" style="background-image: url('/Content/swift.png')"></div>
+                                    }
+                                    <span>
+                                        <a href="/Post/Index/@topic.Id">
+                                            @topic.Title
+                                        </a>
+                                    </span>
+                                </div>
+                                <div class="subTitle">
+                                    <span>Started By <a href="/Profile/Details/@topic.AuthorId">@topic.AuthorName</a></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3" style="vertical-align: middle">
+                                <div class="subTitle">
+                                    @if (topic.RepliesCount == 1)
+                                    {
+                                        <span class="fa fa-comment"> @topic.RepliesCount Comment</span>
+                                    }
+                                    @if (topic.RepliesCount == 0)
+                                    {
+                                        <span class="fa fa-comments"> No Comments</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fa fa-comments"> @topic.RepliesCount Comments</span>
+                                    }
+                                    <br />
+                                    <span class="fa fa-user-o" id="postUser">
+                                        <a href="/Profile/Detail/@topic.AuthorId">
+                                            @topic.AuthorName
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="subTitle">
+                                    @{
+                                        DateTime startTime = Convert.ToDateTime(@topic.DatePosted);
+                                        DateTime endTime = DateTime.Now;
+                                        TimeSpan span = endTime.Subtract(startTime);
+                                        var datePosted = span;
+
+                                        if (datePosted.Seconds <= 59 && datePosted.Minutes == 0 && datePosted.Hours == 0)
+                                        {
+                                            <span>
+                                                Posted: @datePosted.Seconds secs ago
+                                            </span>
+                                        }
+                                        if (datePosted.Minutes <= 59 && datePosted.Hours == 0)
+                                        {
+                                            <span>
+                                                Posted: @datePosted.Minutes mins ago
+                                            </span>
+                                        }
+                                        if (datePosted.Hours <= 24 && datePosted.Days == 0)
+                                        {
+                                            <span>
+                                                Posted: @datePosted.Hours hours ago
+                                            </span>
+                                        }
+                                        if (datePosted.Days != 0)
+                                        {
+                                            <span>
+                                                Posted: @datePosted.Days days ago
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span>
+                                                Posted: ago
+                                            </span>
+                                        }
+
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+              }
+        </tbody>
+    </table>
+                                        }
+                                        else
+                                        {
+                                            <div class="noPost">
+                                                <h3>
+                                                    No search results for @Model.SearchQuery. <br/>
+                                                </h3>
+                                            </div>
+                                        }
+</div>
+@section Scripts{
+    <script>
+        function clearThis(target) {
+            target.value = "";
+        }
+    </script>
+}
