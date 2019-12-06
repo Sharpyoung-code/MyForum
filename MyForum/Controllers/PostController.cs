@@ -20,14 +20,16 @@ namespace MyForum.Controllers
     {
         private readonly IPost _postRepositories;
         private readonly IForum _forumRepositories;
+        private readonly IApplicationUser _applicationUserRepositories;
 
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public PostController(IPost postRepositories, IForum forumRepositories, UserManager<ApplicationUser> userManager)
+        public PostController(IPost postRepositories, IForum forumRepositories, UserManager<ApplicationUser> userManager, IApplicationUser applicationUserRepositories)
         {
             _postRepositories =  postRepositories;
             _forumRepositories = forumRepositories;
             _userManager = userManager;
+            _applicationUserRepositories = applicationUserRepositories;
         }
         
         // GET: Post
@@ -79,6 +81,7 @@ namespace MyForum.Controllers
             var post = BuildPost(model, user);
 
             await _postRepositories.Add(post);
+            await _applicationUserRepositories.IncrementUserRating(user.Id, typeof(Post));
             return RedirectToAction("Index", "Post", new { id = post.Id });
         }
 

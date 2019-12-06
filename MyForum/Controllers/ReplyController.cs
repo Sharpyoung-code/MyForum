@@ -16,10 +16,12 @@ namespace MyForum.Controllers
     {
         private readonly IPost _postRepositories;
         private readonly UserManager<ApplicationUser> _userManager;
-        public ReplyController(IPost postRepositories, UserManager<ApplicationUser> userManger)
+        private readonly IApplicationUser _applicationUserRepositories;
+        public ReplyController(IPost postRepositories, UserManager<ApplicationUser> userManger, IApplicationUser applicationUserRepositories)
         {
             _postRepositories = postRepositories;
             _userManager = userManger;
+            _applicationUserRepositories = applicationUserRepositories;
         }
         // GET: Reply
         public async Task<ActionResult> Create(int id)
@@ -51,6 +53,7 @@ namespace MyForum.Controllers
             var reply = BuildReply(model, user);
 
             await _postRepositories.AddPostReply(reply);
+            await _applicationUserRepositories.IncrementUserRating(user.Id, typeof(PostReply));
             return RedirectToAction("Index", "Post", new { id = model.PostId});
         }
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MyForum.Models;
+using MyForum.Data.Models;
 
 namespace MyForum.Repositories
 {
@@ -25,9 +26,22 @@ namespace MyForum.Repositories
             return GetAll().FirstOrDefault(user => user.Id == id);
         }
 
-        public Task IncrementRating(string id, Type type)
+        public async Task IncrementUserRating(string userId, Type type)
         {
-            throw new NotImplementedException();
+            var user = GetById(userId);
+            var newRating = CalculateUserRating(type, user.Rating);
+            user.Rating = newRating;
+            await _db.SaveChangesAsync();
+        }
+
+        private int CalculateUserRating(Type type, int userRating)
+        {
+            var inc = 0;
+            if (type == typeof(Post))
+                inc = 2;
+            if (type == typeof(PostReply))
+                inc = 5;
+            return userRating + inc;
         }
 
         public async Task SetProfileImage(string id, Uri eri)

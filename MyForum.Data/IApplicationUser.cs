@@ -11,7 +11,7 @@ namespace MyForum.Data
     {
         ApplicationUser GetById(string id);
         IEnumerable<ApplicationUser> GetAll();
-        Task IncrementRating(string id, Type type);
+        Task IncrementUserRating(string userId, Type type);
         Task SetProfileImage(string id, Uri eri);
     }
 }

@@ -16,10 +16,12 @@ namespace MyForum.Controllers
     {
         private readonly IForum _forumRepositories;
         private readonly IPost _postRepositories;
+        
         public ForumController(IForum forumRepositories, IPost postRepositories)
         {
             _forumRepositories = forumRepositories;
             _postRepositories = postRepositories;
+            
         }
         /*public ForumController()
         {
