@@ -15,12 +15,12 @@ namespace MyForum.Repositories
         private readonly ApplicationDbContext _db;
         public ForumRepositories(ApplicationDbContext db)
         {
-            this._db = db;
+            _db = db;
         }
-        public Task Create(Forum forum)
+        public async Task Create(Forum forum)
         {
-            
-            throw new NotImplementedException();
+            _db.Forums.Add(forum);
+            await _db.SaveChangesAsync();
         }
 
         public Task Delete(int forumId)

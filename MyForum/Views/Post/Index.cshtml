@@ -23,7 +23,7 @@
 
                 @if (Model.IsAdmin)
             {
-                    <span class="isAdmin small">Admin</span>
+                    <span class="isAdmin small">Admin</span> <br />
                     <br />
                 }
                 <span style="color:black">@Model.DateCreated</span>
@@ -51,26 +51,29 @@
 {
     foreach (var reply in Model.Replies)
     {
-        <div class="row">
-        <div class="col-md-3">
+        <div class="row replyBody">
+        <div class="col-md-3" style="border-right: 1px solid black">
             <div class="replyAuthor">
-                <i class="fa fa-user-circle-o"></i>
-                Replied By<a href="/Profile/Detail/@reply.AuthorId">
+                
+                 Reply By <br />
+                <i class="fa fa-user-circle-o" style="color: black"></i>
+                <a href="/Profile/Detail/@reply.AuthorId">
                     @reply.AuthorName
                 </a>
-                (@reply.AuthorRating)
+                (<span style="color: red">@reply.AuthorRating</span>)<br />
                 
                 @if (reply.IsAuthorAdmin)
                 {
                     <span class="isAdmin small">Admin</span>
                     <br />
                 }
-                <span>On: @reply.DateCreated</span>
+                <span style="color:black">On <br /> @reply.DateCreated</span>
             </div>
         </div>
         <div class="col-md-9">
-            <div class="postContent">
-                @Html.Raw(Model.PostContent)
+
+            <div class="replyContent">
+                @Html.Raw(@reply.ReplyContent)
             </div>
         </div>
         </div>

@@ -22,6 +22,11 @@
                 <ul class="navbar-nav ml-auto" style="margin-right:20px;">
                     <li class="active nav-item"><a class="nav-link" href="/Home/Index"><i class="fa fa-home"></i> HOME <br/><small>Homepage</small></a></li>
                     <li class="nav-item"><a class="nav-link" href="/Forum/Index"><i class="fa fa-book"></i> FORUMS <br/><small>See The Trends</small></a></li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item"><a class="nav-link" href="/Forum/Create"><i class="fa fa-plus-circle"></i> CREATE FORUM <br /><small>Create</small></a></li>
+                        <li class="nav-item"><a class="nav-link" href="/Profile/Index"><i class="fa fa-users"></i> VIEW USERS <br /><small>Users</small></a></li>
+                    }
                     <li class="nav-item"><a class="nav-link" href="/Home/About"><i class="fa fa-info-circle"></i> ABOUT <br/><small>About Us</small></a></li>
                     <li class="nav-item"><a class="nav-link" href="/Home/Contact"><i class="fa fa-phone"></i> CONTACT <br/><small>Contact Us</small></a></li>
                 </ul>

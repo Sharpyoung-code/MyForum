@@ -7,16 +7,18 @@ namespace MyForum.Data.Migrations
     {
         public override void Up()
         {
+            
             AddColumn("dbo.AspNetUsers", "Rating", c => c.Int(nullable: false));
             AddColumn("dbo.AspNetUsers", "MemberSince", c => c.DateTime(nullable: false));
-            AddColumn("dbo.AspNetUsers", "IsActive", c => c.Boolean(nullable: false));
+            AddColumn("dbo.AspNetUsers", "IsActive", c => c.Boolean(nullable: false)); 
         }
         
         public override void Down()
         {
+            
             DropColumn("dbo.AspNetUsers", "IsActive");
             DropColumn("dbo.AspNetUsers", "MemberSince");
-            DropColumn("dbo.AspNetUsers", "Rating");
+            DropColumn("dbo.AspNetUsers", "Rating"); 
         }
     }
 }

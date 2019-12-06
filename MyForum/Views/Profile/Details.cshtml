@@ -1,0 +1,27 @@
+﻿@model MyForum.Models.Profile.ProfileModel
+
+<div class="profilePage">
+    <div class="jumbotron profileHeading">
+        <h2>User Profile || @Model.UserName</h2>
+        <hr />
+    </div>
+    <div class="row">
+        <div class="col-md-3 profileIconColumn">
+            <span class="profileIcon">
+                <i class="fa fa-user-circle" style="font-size: 136px; color: black"></i>
+            </span>
+        </div>
+        <div class="col-md-9 profileColumn">
+           <div class="profileDetails">
+            <span style="font-weight: 600">UserName:</span> <span style="color:blue">@Model.UserName</span>
+            @if (Model.IsAdmin)
+            {
+                <span class="isAdmin" style="color: red">(Admin)</span><br/>
+            }
+            <span style="font-weight:600">User Rating:</span> <span style="color:darkblue">@Model.UserRating</span><br />
+            <span style="font-weight: 600">Email:</span> <span style="color: blue">@Model.Email</span><br />
+            <span style="font-weight:600">Member Since:</span> <span style="color: blue">@Model.MemberSince</span>
+           </div>
+        </div>
+    </div>
+</div>

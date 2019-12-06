@@ -53,8 +53,10 @@
   <ItemGroup>
     <Compile Include="ForumRepositories.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="ApplicationUserRepositories.cs" />
     <Compile Include="PostRepositories.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UploadRepositories.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyForum.Data\MyForum.Data.csproj">

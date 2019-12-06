@@ -26,6 +26,8 @@ namespace MyForum
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
             container.RegisterType<IForum, ForumRepositories>();
             container.RegisterType<IPost, PostRepositories>();
+            container.RegisterType<IApplicationUser, ApplicationUserRepositories>();
+            container.RegisterType<IUpload, UploadRepositories>();
             container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>();
             container.RegisterType<UserManager<ApplicationUser>>();
             container.RegisterType<DbContext, ApplicationDbContext>();

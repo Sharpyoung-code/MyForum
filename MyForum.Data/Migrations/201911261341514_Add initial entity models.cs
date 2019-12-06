@@ -2,7 +2,7 @@ namespace MyForum.Data.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class Addinitialentitymodels : DbMigration
     {
         public override void Up()
@@ -149,6 +149,7 @@ namespace MyForum.Data.Migrations
             DropTable("dbo.Posts");
             DropTable("dbo.PostReplies");
             DropTable("dbo.Fora");
+        
         }
     }
 }

@@ -8,6 +8,7 @@ using MyForum.Data.Models;
 using System;
 using MyForum.Repositories;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MyForum.Controllers
 {
@@ -72,7 +73,23 @@ namespace MyForum.Controllers
         {
             return RedirectToAction("Topic", new { id, searchQuery });
         }
-
+        public ActionResult Create()
+        {
+            var model = new AddNewForumModel();
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<ActionResult> AddForum(AddNewForumModel model)
+        {
+            var forum = new Forum
+            {
+                Title = model.Title,
+                Description = model.Description,
+                Created = DateTime.Now
+            };
+            await _forumRepositories.Create(forum);
+            return RedirectToAction("Index");
+        }
         private ForumListingModel BuildForumListing(Forum forum)
         {
 

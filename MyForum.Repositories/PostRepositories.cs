@@ -24,9 +24,10 @@ namespace MyForum.Repositories
             
         }
 
-        public Task AddPostReply(PostReply reply)
+        public async Task AddPostReply(PostReply reply)
         {
-            throw new NotImplementedException();
+            _db.PostReplies.Add(reply);
+            await _db.SaveChangesAsync();
         }
 
         public Task Create(Post forum)
