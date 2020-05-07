@@ -24,7 +24,7 @@ namespace MyForum.Controllers
 
         private HomeIndexModel BuildHomeIndexModel()
         {
-            var latestPosts = _postRepositories.GetLatestPosts(20);
+            var latestPosts = _postRepositories.GetLatestPosts(10);
             var posts = latestPosts.Select(post => new PostListingModel
             {
                 Id = post.Id,
@@ -42,7 +42,7 @@ namespace MyForum.Controllers
                 LatestPosts = posts,
                 SearchQuery = ""
             };
-        }
+        } 
 
         private ForumListingModel GetForumListingForPost(Post post)
         {

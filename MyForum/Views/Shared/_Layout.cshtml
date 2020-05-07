@@ -6,11 +6,16 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+   <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Kurale|Lato|Montserrat|Open+Sans|Oswald|Raleway|Roboto&display=swap" rel="stylesheet"> 
 </head>
 <body>
     <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
-        <a class="navbar-brand" href="/Home/Index"><i class="fa fa-connectdevelop" aria-hidden="true" style="font-size: 80px; margin-left: 20px"></i> <strong>TECH FORUM</strong> <br /><small style="margin-left: 20px">The Home Of Technology And Programming</small></a>
+        <i class="fa fa-connectdevelop" aria-hidden="true" style="font-size: 60px; margin-left: 20px;"></i>
+        <a class="navbar-brand" href="/Home/Index"> <strong style="font-stretch:narrower; font-size: 30px; margin-left: 10px; margin-top: 80px" class="brandName">
+            TECH-FORUM
+               </strong> <br />
+        <small style="margin-left: 10px">The Home Of Technology And Programming</small>
+        </a>
           
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#collapsibleNavbar">
                     <span class="navbar-toggler-icon"></span>
@@ -34,7 +39,7 @@
             </div>
     </nav>
     
-        <div class="container body-content">
+        <div class="body-content">
             @RenderBody()
             <hr />
             <footer>

@@ -23,9 +23,13 @@ namespace MyForum.Repositories
             await _db.SaveChangesAsync();
         }
 
-        public Task Delete(int forumId)
+        public async Task Delete(int forumId)
         {
-            throw new NotImplementedException();
+            var forum = GetById(forumId);
+            _db.Forums.Remove(forum);
+            
+            await _db.SaveChangesAsync();
+         
         }
 
         public IEnumerable<Forum> GetAll()
@@ -34,9 +38,16 @@ namespace MyForum.Repositories
                 .Include(forum => forum.Posts);
         }
 
-        public IEnumerable<ApplicationUser> GetAllActiveUsers()
+        public IEnumerable<ApplicationUser> GetAllActiveUsers(int id)
         {
-            throw new NotImplementedException();
+            var posts = GetById(id).Posts;
+            if(posts != null || !posts.Any())
+            {
+                var postUsers = posts.Select(p => p.User);
+                var replyUsers = posts.SelectMany(p => p.Replies).Select(r => r.User);
+                return postUsers.Union(replyUsers).Distinct();
+            }
+            return new List<ApplicationUser>();
         }
 
         public Forum GetById(int id)

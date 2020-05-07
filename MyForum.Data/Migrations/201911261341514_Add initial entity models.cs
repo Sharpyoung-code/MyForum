@@ -29,8 +29,8 @@ namespace MyForum.Data.Migrations
                         User_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Posts", t => t.Post_Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.User_Id)
+                .ForeignKey("dbo.Posts", t => t.Post_Id, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.User_Id, cascadeDelete: true)
                 .Index(t => t.Post_Id)
                 .Index(t => t.User_Id);
             
@@ -46,8 +46,8 @@ namespace MyForum.Data.Migrations
                         User_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Fora", t => t.Forum_Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.User_Id)
+                .ForeignKey("dbo.Fora", t => t.Forum_Id, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.User_Id, cascadeDelete: true)
                 .Index(t => t.Forum_Id)
                 .Index(t => t.User_Id);
             

@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.Google;
 using Owin;
 using MyForum.Models;
 using MyForum.Data;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MyForum
 {
@@ -65,5 +66,6 @@ namespace MyForum
             //    ClientSecret = ""
             //});
         }
+        
     }
 }

@@ -2,7 +2,7 @@
 
 <div class="postReplyPage">
     <div class="postHeading">
-        <span style="padding-top: 30px; padding-bottom: 30px; padding-left: 20px; position: relative; float: left">
+        <span style="padding-top: 30px; padding-bottom: 30px; padding-left: 20px; position: relative; float: left; font-size: 25px">
         @Model.Title
         </span>
         <span class="backBtn">
@@ -16,15 +16,15 @@
         <div class="col-md-3">
             <div class="postAuthor">
                 <i class="fa fa-user-circle-o" style="color: black"></i>
-                <a href="/Profile/Detail/@Model.AuthorId">
+                <a href="/Profile/Details/@Model.AuthorId">
                     @Model.AuthorName
                 </a>
-                (<span style="color: red">@Model.AuthorRating</span>)<br />
+                (<span style="color: red">@Model.AuthorRating</span>)<br/>
 
                 @if (Model.IsAdmin)
             {
-                    <span class="isAdmin small">Admin</span> <br />
-                    <br />
+                    <span class="isAdmin small" style="color: green">Admin</span> <br />
+                    
                 }
                 <span style="color:black">@Model.DateCreated</span>
             </div>
@@ -33,11 +33,20 @@
             <div class="postContent">
                 @Html.Raw(Model.PostContent)
             </div>
+            <div class="editDelete">
+                @if(User.Identity.Name == Model.AuthorName)
+                {
+                    <span>
+                        <strong style="color: black">(</strong><a href="/Post/Edit/@Model.Id">Edit</a><strong style="color: black">)</strong>
+                    </span>
+                    
+                }
+            </div>
         </div>
     </div>
     <div class="row"></div>
-    @if (User.Identity.IsAuthenticated)
-    {
+   
+    
         <div class="postreplyBtn" style="background-color: darkgray; text-align:center; padding-top: 2px; padding-bottom: 2px; vertical-align: middle; border-radius: 0px 0px 5px 5px">
             <div style="text-align: center; position: relative">
             <h6>
@@ -45,7 +54,7 @@
             </h6>
             </div>
         </div>
-    }
+    
 </div>
 @if (Model.Replies.Any())
 {
@@ -60,12 +69,11 @@
                 <a href="/Profile/Detail/@reply.AuthorId">
                     @reply.AuthorName
                 </a>
-                (<span style="color: red">@reply.AuthorRating</span>)<br />
+                (<span style="color: red">@reply.AuthorRating</span>)
                 
                 @if (reply.IsAuthorAdmin)
                 {
-                    <span class="isAdmin small">Admin</span>
-                    <br />
+                    <span class="isAdmin small" style="color: green ">Admin</span><br />
                 }
                 <span style="color:black">On <br /> @reply.DateCreated</span>
             </div>
@@ -74,6 +82,15 @@
 
             <div class="replyContent">
                 @Html.Raw(@reply.ReplyContent)
+            </div>
+            <div class="editDelete" style="margin-top: 40px">
+                @if (User.Identity.Name == reply.AuthorName)
+                {
+                    <span>
+                        <strong style="color: black">(</strong><a href="/Reply/Edit/@reply.Id">Edit</a><strong style="color: black">)</strong>
+                    </span>
+
+                }
             </div>
         </div>
         </div>

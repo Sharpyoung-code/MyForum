@@ -44,7 +44,7 @@ namespace MyForum.Repositories
             return userRating + inc;
         }
 
-        public async Task SetProfileImage(string id, Uri eri)
+        public async Task SetProfileImage(string id, Uri uri)
         {
             var user = GetById(id);
             //_db.Update(user);

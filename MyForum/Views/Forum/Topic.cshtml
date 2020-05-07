@@ -78,6 +78,10 @@
                         <a href="/Account/Register">
                             registered member
                         </a>
+                        or
+                        <a href="/Account/Login">
+                            login
+                        </a>
                         to create a new post.
                     </span>
                 </p>
@@ -129,7 +133,7 @@
                                     }
                                     <br />
                                     <span class="fa fa-user-o" id="postUser">
-                                        <a href="/Profile/Detail/@topic.AuthorId">
+                                        <a href="/Profile/Details/@topic.AuthorId">
                                             @topic.AuthorName
                                         </a>
                                     </span>
@@ -143,19 +147,19 @@
                                         TimeSpan span = endTime.Subtract(startTime);
                                         var datePosted = span;
 
-                                        if (datePosted.Seconds <= 59 && datePosted.Minutes == 0 && datePosted.Hours == 0 && datePosted.Days == 0)
+                                        if (datePosted.Seconds != 0 && datePosted.Minutes <= 0)
                                         {
                                             <span>
                                                 Posted: @datePosted.Seconds secs ago
                                             </span>
                                         }
-                                        if (datePosted.Minutes <= 59 && datePosted.Hours == 0 && datePosted.Days == 0)
+                                        if (datePosted.Minutes != 0 && datePosted.Hours <= 0)
                                         {
                                             <span>
                                                 Posted: @datePosted.Minutes mins ago
                                             </span>
                                         }
-                                        if (datePosted.Hours <= 23 && datePosted.Days == 0)
+                                        if (datePosted.Hours != 0 && datePosted.Days <= 0)
                                         {
                                             <span>
                                                 Posted: @datePosted.Hours hours ago
@@ -167,12 +171,7 @@
                                                 Posted: @datePosted.Days days ago
                                             </span>
                                         }
-                                        else
-                                        {
-                                            <span>
-                                                Posted: ago
-                                            </span>
-                                        }
+                                        
 
                                     }
                                 </div>

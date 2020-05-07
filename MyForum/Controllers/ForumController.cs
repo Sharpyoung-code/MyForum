@@ -36,7 +36,8 @@ namespace MyForum.Controllers
                 Name = forum.Title,
                 Description = forum.Description,
                 Created = forum.Created.ToString(),
-                postsCount = forum.Posts.Count
+                postsCount = forum.Posts.Count,
+                ActiveUsers = _forumRepositories.GetAllActiveUsers(forum.Id).Count()
             });
 
             var model = new ForumIndexViewModel
@@ -75,12 +76,14 @@ namespace MyForum.Controllers
         {
             return RedirectToAction("Topic", new { id, searchQuery });
         }
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             var model = new AddNewForumModel();
             return View(model);
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> AddForum(AddNewForumModel model)
         {
             var forum = new Forum
@@ -90,6 +93,14 @@ namespace MyForum.Controllers
                 Created = DateTime.Now
             };
             await _forumRepositories.Create(forum);
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var forum = _forumRepositories.GetById(id);
+            await _forumRepositories.Delete(forum.Id);
             return RedirectToAction("Index");
         }
         private ForumListingModel BuildForumListing(Forum forum)

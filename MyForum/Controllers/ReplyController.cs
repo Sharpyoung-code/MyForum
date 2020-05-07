@@ -6,12 +6,14 @@ using MyForum.Models.Reply;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
 namespace MyForum.Controllers
 {
+    [Authorize]
     public class ReplyController : Controller
     {
         private readonly IPost _postRepositories;
@@ -66,6 +68,54 @@ namespace MyForum.Controllers
                 Created = DateTime.Now,
                 User_Id = user.Id,
                 Post_Id = post.Id
+            };
+        }
+        public ActionResult Edit(int id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var reply = _postRepositories.GetByReplyId(id);
+            if (reply == null)
+            {
+                return HttpNotFound();
+            }
+            var model = new EditReplyModel
+            {
+                Id = reply.Id,
+                NewReplyContent = reply.Content,
+                PostId = reply.Post_Id,
+                UserId = reply.User_Id,
+                DateCreated = reply.Created,
+                ForumName = reply.Post.Forum.Title,
+                PostContent = reply.Post.Content,
+                PostTitle = reply.Post.Title
+            };
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditReply([Bind(Include = "Id, NewReplyContent, PostId, UserId, DateCreated")] EditReplyModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var reply = BuildEditPostModel(model);
+                await _postRepositories.UpdateReplyContent(reply);
+                return RedirectToAction("Index", "Post", new { id = model.PostId });
+            }
+            return View(model);
+        }
+
+        private PostReply BuildEditPostModel(EditReplyModel model)
+        {
+            return new PostReply
+            {
+                Id = model.Id,
+                Content = model.NewReplyContent,
+                Post_Id = model.PostId,
+                User_Id = model.UserId,
+                Created = model.DateCreated
             };
         }
     }

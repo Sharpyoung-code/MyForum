@@ -54,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="CascadeDeleteAttribute.cs" />
+    <Compile Include="CascadeDeleteAttributeConvention.cs" />
     <Compile Include="IApplicationUser.cs" />
     <Compile Include="IForum.cs" />
     <Compile Include="IPost.cs" />
@@ -73,6 +75,18 @@
     <Compile Include="Migrations\201912061345072_Updated keys in post reply table.cs" />
     <Compile Include="Migrations\201912061345072_Updated keys in post reply table.Designer.cs">
       <DependentUpon>201912061345072_Updated keys in post reply table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912071627158_cascade delete.cs" />
+    <Compile Include="Migrations\201912071627158_cascade delete.Designer.cs">
+      <DependentUpon>201912071627158_cascade delete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912071738596_cascade required.cs" />
+    <Compile Include="Migrations\201912071738596_cascade required.Designer.cs">
+      <DependentUpon>201912071738596_cascade required.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912071909254_Updated cascade function.cs" />
+    <Compile Include="Migrations\201912071909254_Updated cascade function.Designer.cs">
+      <DependentUpon>201912071909254_Updated cascade function.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -97,6 +111,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912061345072_Updated keys in post reply table.resx">
       <DependentUpon>201912061345072_Updated keys in post reply table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912071627158_cascade delete.resx">
+      <DependentUpon>201912071627158_cascade delete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912071738596_cascade required.resx">
+      <DependentUpon>201912071738596_cascade required.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912071909254_Updated cascade function.resx">
+      <DependentUpon>201912071909254_Updated cascade function.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

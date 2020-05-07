@@ -1,5 +1,6 @@
 ﻿using MyForum.Data;
 using System;
+using System.Web.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,8 +20,15 @@ namespace MyForum.Repositories
         }
         public async Task Add(Post post)
         {
-            _db.Posts.Add(post);
-            await _db.SaveChangesAsync();
+            try
+            {
+                _db.Posts.Add(post);
+                await _db.SaveChangesAsync();
+            }
+            catch(Exception exception)
+            {
+
+            }
             
         }
 
@@ -57,6 +65,10 @@ namespace MyForum.Repositories
                 .Include(post => post.Forum)
                 .First();
         }
+        public PostReply GetByReplyId(int id)
+        {
+            return _db.PostReplies.Where(reply => reply.Id == id).First();
+        }
 
         public IEnumerable<Post> GetFilteredPosts(Forum forum, string searchQuery)
         {
@@ -81,14 +93,35 @@ namespace MyForum.Repositories
             return GetAll().OrderByDescending(post => post.Created).Take(v);
         }
 
-        public Task UpdatePostContent(int forumId, string newContent)
+        public async Task UpdatePostContent(Post post)
         {
-            throw new NotImplementedException();
+            try
+            {
+                
+                _db.Entry(post).State = System.Data.Entity.EntityState.Modified;
+                await _db.SaveChangesAsync();
+                
+            }
+            catch(Exception exception)
+            {
+
+            }
+            
         }
 
-        public Task UpdatePostTitle(int forumId, string newTitle)
+        public async Task UpdateReplyContent(PostReply reply)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                _db.Entry(reply).State = System.Data.Entity.EntityState.Modified;
+                await _db.SaveChangesAsync();
+
+            }
+            catch (Exception exception)
+            {
+
+            }
         }
         private bool disposed = false;
         protected virtual void Dispose(bool disposing)

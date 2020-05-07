@@ -214,12 +214,14 @@
     <Compile Include="Models\Forum\ForumListingModel.cs" />
     <Compile Include="Models\Home\HomeIndexModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Post\EditPostModel.cs" />
     <Compile Include="Models\Post\ForumTopicViewModel.cs" />
     <Compile Include="Models\Post\NewPostModel.cs" />
     <Compile Include="Models\Post\PostIndexModel.cs" />
     <Compile Include="Models\Post\PostListingModel.cs" />
     <Compile Include="Models\Profile\ProfileListingModel.cs" />
     <Compile Include="Models\Profile\ProfileModel.cs" />
+    <Compile Include="Models\Reply\EditReplyModel.cs" />
     <Compile Include="Models\Reply\PostReplyModel.cs" />
     <Compile Include="Models\Search\SearchViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -408,6 +410,9 @@
     <Content Include="Views\Profile\Details.cshtml" />
     <Content Include="Views\Reply\Create.cshtml" />
     <Content Include="Views\Forum\Create.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Post\Edit.cshtml" />
+    <Content Include="Views\Reply\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

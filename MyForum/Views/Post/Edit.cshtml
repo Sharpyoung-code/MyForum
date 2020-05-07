@@ -1,0 +1,41 @@
+﻿@model MyForum.Models.Post.EditPostModel
+
+<div class="createPostPage">
+    <div class="jumbotron createPostHeading">
+        <h2>Edit Post ||</h2>
+        <hr />
+    </div>
+    <div class="row createPostBody">
+        <div class="col-md-12">
+            @using (Html.BeginForm("EditPost", "Post", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "editPostForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4>Edit your Post.</h4>
+                <hr />
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.NewPostTitle, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(m => m.NewPostTitle, new { @class = "col-md-12 form-control", cols = "120" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.NewPostContent, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(m => m.NewPostContent, new { @class = "col-md-12 form-control", cols = "120" })
+                    </div>
+                </div>
+                @Html.HiddenFor(m => m.Id, new { id = Model.Id })
+                @Html.HiddenFor(m => m.ForumId)
+                @Html.HiddenFor(m => m.UserId)
+                @Html.HiddenFor(m => m.DateCreated)
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" class="btn btn-primary" value="Save" />
+                    </div>
+                </div>
+
+            }
+</div>
+</div>
+</div>

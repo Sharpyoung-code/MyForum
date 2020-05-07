@@ -11,7 +11,7 @@ namespace MyForum.Data.Migrations
             DropIndex("dbo.Posts", new[] { "Forum_Id" });
             AlterColumn("dbo.Posts", "Forum_Id", c => c.Int());
             CreateIndex("dbo.Posts", "Forum_Id");
-            AddForeignKey("dbo.Posts", "Forum_Id", "dbo.Fora", "Id");
+            AddForeignKey("dbo.Posts", "Forum_Id", "dbo.Fora", "Id", cascadeDelete: true);
         }
         
         public override void Down()

@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MyForum.Models;
 using MyForum.Data.Models;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace MyForum.Data
 {
@@ -22,6 +23,14 @@ namespace MyForum.Data
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Add<CascadeDeleteAttributeConvention>();
         }
     }
 }

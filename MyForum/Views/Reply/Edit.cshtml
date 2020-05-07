@@ -1,0 +1,89 @@
+﻿@model MyForum.Models.Reply.EditReplyModel
+
+<div class="replyPage">
+    <div class="jumbotron replyPageheading">
+
+        @if (Model.ForumName == "Python")
+        {
+            <div class="Logo" style="background-image: url('/Content/python.png')"></div>
+        }
+        @if (Model.ForumName == "Javascript")
+        {
+            <div class="Logo" style="background-image: url('/Content/javascript.png')"></div>
+        }
+        @if (Model.ForumName == "C#")
+        {
+            <div class="Logo" style="background-image: url('/Content/csharp.png')"></div>
+        }
+        @if (Model.ForumName == "Go")
+        {
+            <div class="Logo" style="background-image: url('/Content/go.png')"></div>
+        }
+        @if (Model.ForumName == "Php")
+        {
+            <div class="Logo" style="background-image: url('/Content/php.png')"></div>
+        }
+        @if (Model.ForumName == "C")
+        {
+            <div class="Logo" style="background-image: url('/Content/c.png')"></div>
+        }
+        @if (Model.ForumName == "C++")
+        {
+            <div class="Logo" style="background-image: url('/Content/cpp.png')"></div>
+        }
+        @if (Model.ForumName == "CSS")
+        {
+            <div class="Logo" style="background-image: url('/Content/css.png')"></div>
+        }
+        @if (Model.ForumName == "Html")
+        {
+            <div class="Logo" style="background-image: url('/Content/html.png')"></div>
+        }
+        @if (Model.ForumName == "Java")
+        {
+            <div class="Logo" style="background-image: url('/Content/java.png')"></div>
+        }
+        @if (Model.ForumName == "Ruby")
+        {
+            <div class="Logo" style="background-image: url('/Content/ruby.png')"></div>
+        }
+        @if (Model.ForumName == "Kotlin")
+        {
+            <div class="Logo" style="background-image: url('/Content/kotlin.png')"></div>
+        }
+        @if (Model.ForumName == "Swift")
+        {
+            <div class="Logo" style="background-image: url('/Content/swift.png')"></div>
+        }
+        <h3>@Model.ForumName || @Model.PostTitle</h3>
+        <hr />
+        <span style="position: relative; float:right; padding-top: 5px"><a href="/Post/Index/@Model.PostId" class="btn btn-info">Back To Post</a></span>
+    </div>
+    <div class="row postReplyContent">
+        <h5>
+            RE: <i>"@Model.PostContent"</i>
+        </h5>
+    </div>
+    <div class="row postReplyBody">
+        <div class="postReplyForm">
+            <h4>Reply: </h4>
+            <form method="post" action="/Reply/EditReply" role="form">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-md-12 replyInputColumn">
+                        @Html.TextAreaFor(m => m.NewReplyContent, new { @class = "col-md-12 form-control", rows = "10", cols = "120" })
+                    </div>
+                </div>
+                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.UserId)
+                @Html.HiddenFor(m => m.PostId)
+                @Html.HiddenFor(m => m.DateCreated)
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Submit Reply" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

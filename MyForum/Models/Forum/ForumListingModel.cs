@@ -12,5 +12,6 @@ namespace MyForum.Models
         public string Description { get; set; }
         public string Created { get; set; }
         public int postsCount { get; set; }
+        public int ActiveUsers { get; set; }
     }
 }

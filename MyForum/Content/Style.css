@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 132px;
+    padding-top: 0px;
     background: url(main.jpg);
     background-repeat: no-repeat;
     background-color: #EEE;
@@ -8,27 +8,55 @@
     background-size: 100%;
 }
 @media (max-width: 980px) {
-    body{
+    body {
         padding-top: 0px;
+        background-repeat: no-repeat;
+        background-color: #EEE;
+        background-position: center;
+        background-attachment: fixed;
+        background-size: 100%;
     }
+}
+@media (max-width: 980px){
+    .navbar .navbar-brand, .navbar i {
+        font-size: 1rem;
+    }
+}
+.body-content{
+    padding-top: 100px;
+}
+.overlay {
+    background: rgba(244, 244, 244, 0.5);
+    min-height: 100%;
+    min-width: 100%;
+    left: 0;
+    top: 0;
 }
 .frontPageHeading{
     background: url(mainForum.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-    padding-top: 132px;
     height: 40vh;
     position: relative;
     border: 2px solid white;
-    border-radius: 5px;
+    border-radius: 0px 0px 5px 5px;
+}
+.frontPageText p{
+    color: black;
+    text-shadow: 10px 8px 2px #333;
+    font-family: 'Kurale', 'Josefin Sans', sans-serif;
+    font-weight: 800;
+    font-style:italic;
 }
 .frontPage{
     background-color: black;
     border: 1px solid white;
+    border-radius: 5px 5px 0px 0px;
 }
 .frontPage h3{
     padding-top: 10px;
     padding-bottom: 10px;
+    font-family: 'Raleway', sans-serif;
 }
 .frontPage .frontPageSearch {
         padding-top: 10px;
@@ -157,7 +185,7 @@ table{
     background-color: black;
     height: 100px;
     border: 1px solid white;
-    border-radius: 5px;
+    border-radius: 5px 5px 0px 0px;
 }
 .postHeading .backBtn{
     position: relative;
@@ -182,24 +210,25 @@ table{
     color: black;
     width: 80%;
 }
-.postReplyPage, .forumsPage, .frontPageImage, .searchView, .profilePage, .replyPage, .loginPage, .topicPage, .createPostPage, .registerPage {
+.postReplyPage, .forumsPage, .frontPageImage, .searchView, .profilePage, .replyPage, .loginPage, .topicPage, .createPostPage, .registerPage, .usersPage, .fronPageImage {
     padding-top: 0;
 }
 @media (max-width: 980px) {
-    .postReplyPage, .forumsPage, .frontPageHeading, .searchView, .profilePage, .replyPage, .loginPage, .topicPage, .createPostPage, .registerPage {
+    .postReplyPage, .forumsPage, .frontPageHeading, .searchView, .profilePage, .replyPage, .loginPage, .topicPage, .createPostPage, .registerPage, .usersPage, .fronPageImage {
         padding-top: 132px;
     }
 }
-.postReplyPage .postBody, .replyBody{
+.postReplyPage .postBody{
     background-color: white;
-    margin-top: 30px;
     border-radius: 5px;
 }
 .postReplyPage .postBody .col-md-3{
     border-right: 1px solid black;
 }
-.replyBody{
+.replyBody {
     margin-top: 20px;
+    background-color: white;
+    border-radius: 5px;
 }
 .postAuthor{
     padding-bottom: 10px;
@@ -331,4 +360,25 @@ table{
 .postReplyBody{
     border: 1px solid black;
     border-radius: 5px;
+}
+.usersPageHeading {
+    background-color: black;
+    border: 1px solid white;
+    padding-bottom: 50px;
+    padding-top: 30px;
+}
+.usersPageHeading hr {
+        border: none;
+        margin-top: 0;
+        margin-bottom: 0;
+        border-top: 2px solid white;
+}
+.usersPageBody {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.editDelete{
+    position: relative;
+    margin-top: 10px;
 }

@@ -1,18 +1,19 @@
 ﻿@model MyForum.Models.Home.HomeIndexModel
 
 <div class="frongPageImage">
-<div class="frontPageHeading">
+<div class="row frontPageHeading">   
+    <div class="overlay"></div>
     <div class="frontPageText">
-        <p class="frontPageSubHeading">Learn, Collaborate, Share Knowledge</p>
-        <p class="frontPageSubHeading">Tech Forum is the world's fastest growing coding forum</p>
+        <p style="font-size: 2.5rem">Learn, Collaborate, Share Knowledge</p>
+        <p style="font-family: 'Cinzel', sans-serif; font-size: 1rem">Tech Forum is the world's fastest growing coding forum</p>
     </div>
 </div><br />
-
+    <div class="container">
     <div class="row frontPage">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <h3 id="latestPosts">LATEST POSTS</h3>
         </div>
-        <div class="col-md-6 frontPageLearn">
+        <div class="col-md-4 frontPageLearn">
         <div class="frontPageSearch" style="position:relative; float:right">
             @using (Html.BeginForm("Search", "Search", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "searchForm" }))
            {
@@ -20,7 +21,11 @@
            }
         </div>
        </div>
+        <div class="col-md-4">
+            CATEGORIES
+        </div>
     </div>
+        </div>
     <div class="row frontPageContent">
         
         <table class="table table-hover" id="latestPostTable">
@@ -30,7 +35,7 @@
                     <tr style="background-color: #343a40">
                         <td>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                    
                                         @if(post.Forum.Name == "Python")
                                         {
@@ -42,7 +47,7 @@
                                         }
                                       @if (post.Forum.Name == "C#")
                                     {
-                                        <div class="Logo" style="background-image: url('/Content/c#.png')"></div>
+                                        <div class="Logo" style="background-image: url('/Content/csharp.png')"></div>
                                     }
                                     @if (post.Forum.Name == "Go")
                                     {
@@ -58,7 +63,7 @@
                                     }
                                     @if (post.Forum.Name == "C++")
                                     {
-                                        <div class="Logo" style="background-image: url('/Content/c++.png')"></div>
+                                        <div class="Logo" style="background-image: url('/Content/cpp.png')"></div>
                                     }
                                     @if (post.Forum.Name == "CSS")
                                     {
@@ -94,7 +99,7 @@
                                     </div>
                                     </div>
                                    
-                                      <div class="col-md-3" style="vertical-align: middle">
+                                      <div class="col-md-2" style="vertical-align: middle">
                                         <div class="subTitle">
                                         @if (post.RepliesCount >= 2)
                                         {
@@ -110,13 +115,13 @@
                                         }
                                         <br/>
                                         <span class="fa fa-user-o" id="postUser">
-                                           <a href="/Profile/Detail/@post.AuthorId">
+                                           <a href="/Profile/Details/@post.AuthorId">
                                               @post.AuthorName
                                            </a>
                                         </span>
                                         </div>
                                        </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-2">
                                             <div class="subTitle">
                                             @{
                                                 DateTime startTime = Convert.ToDateTime(@post.DatePosted);
@@ -124,19 +129,19 @@
                                                 TimeSpan span = endTime.Subtract(startTime);
                                                 var datePosted = span;
 
-                                            if (datePosted.Seconds <= 59 && datePosted.Minutes == 0 && datePosted.Hours == 0 && datePosted.Days == 0 )
+                                            if (datePosted.Seconds != 0 && datePosted.Minutes <= 0)
                                             {
                                                 <span>
                                                     Posted: @datePosted.Seconds secs ago
                                                 </span>
                                             }
-                                                if (datePosted.Minutes <= 59 && datePosted.Hours == 0 && datePosted.Days == 0)
+                                                if (datePosted.Minutes != 0 && datePosted.Hours <= 0)
                                                 {
                                                     <span>
                                                         Posted: @datePosted.Minutes mins ago
                                                     </span>
                                                 }
-                                                if (datePosted.Hours <= 24 && datePosted.Days == 0)
+                                                if ( datePosted.Hours != 0 && datePosted.Days <= 0)
                                                 {
                                                     <span>
                                                         Posted: @datePosted.Hours hours ago
@@ -148,12 +153,7 @@
                                                         Posted: @datePosted.Days days ago
                                                     </span>
                                                 }
-                                                else
-                                                {
-                                                    <span>
-                                                        Posted: ago
-                                                    </span>
-                                                }
+                                                
 
                                             }
                                            </div>

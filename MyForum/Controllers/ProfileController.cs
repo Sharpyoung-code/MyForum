@@ -21,6 +21,7 @@ namespace MyForum.Controllers
             _userRepositories = userRepositories;
             _uploadRepositories = uploadRepositories;
         }
+        [Authorize]
         // GET: Profile
         public ActionResult Details(string id)
         {
@@ -36,6 +37,25 @@ namespace MyForum.Controllers
                 IsAdmin = userRole
             };
             return View(model); 
+        }
+        [Authorize(Roles = "Admin")]
+        public ActionResult Index()
+        {
+            var profiles = _userRepositories.GetAll()
+                .OrderByDescending(user => user.Rating)
+                .Select(u => new ProfileModel
+                {
+                    Email = u.Email,
+                    UserName = u.UserName,
+                    UserRating = u.Rating.ToString(),
+                    MemberSince = u.MemberSince,
+
+                });
+            var model = new ProfileListingModel
+            {
+                Profiles = profiles
+            };
+            return View(model);
         }
     }
 }
